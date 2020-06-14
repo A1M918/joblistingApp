@@ -36,6 +36,7 @@ const signInReducer = (state = getInitialState(), action) => {
       };
     case SIGN_IN_FAILURE:
       return {
+        ...state,
         isSubmitting: false,
         error: action.payload.message,
       };
@@ -52,6 +53,7 @@ const signInReducer = (state = getInitialState(), action) => {
       };
     case SIGN_UP_FAILURE:
       return {
+        ...state,
         isSubmitting: false,
         error: action.payload.message,
       };

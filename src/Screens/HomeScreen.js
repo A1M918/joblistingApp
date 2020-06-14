@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {FlatList, View, TouchableOpacity} from 'react-native';
+import {FlatList, View, TouchableOpacity, StyleSheet} from 'react-native';
 import {Card, Text, Icon} from 'react-native-elements';
 
 import {
@@ -26,8 +26,9 @@ class HomeScreen extends Component {
   }
 
   render() {
+    const {container, roundButton, textGeneralPadding, detailsText} = style;
     return (
-      <View style={{flex: 1}}>
+      <View style={container}>
         <FlatList
           data={this.props.jobs}
           onRefresh={this.getAllJobs}
@@ -35,39 +36,44 @@ class HomeScreen extends Component {
           refreshing={this.props.fetching}
           renderItem={({item}) => (
             <Card title={item.title}>
-              <Text style={{paddingVertical: 5}}>Company: {item.company}</Text>
-              <Text style={{paddingVertical: 5}}>Phone: {item.phone}</Text>
-              <Text
-                style={{
-                  borderTopWidth: 1,
-                  marginTop: 10,
-                  paddingTop: 10,
-                }}>
-                {item.details}
-              </Text>
+              <Text style={textGeneralPadding}>Company: {item.company}</Text>
+              <Text style={textGeneralPadding}>Phone: {item.phone}</Text>
+              <Text style={detailsText}>{item.details}</Text>
             </Card>
           )}
           keyExtractor={({_id}) => _id}
         />
         <TouchableOpacity
-          style={{
-            backgroundColor: '#326da8',
-            position: 'absolute',
-            bottom: '8%',
-            right: '8%',
-            width: 80,
-            height: 80,
-            borderRadius: 40,
-          }}
+          style={roundButton}
           onPress={() => NavigationService.navigate('CreateJob')}>
-          {/* <Fab style={{backgroundColor: '#5067FF'}} position="bottomRight"> */}
-          <Icon name="add" />
-          {/* </Fab> */}
+          <Icon name="add" size={30} />
         </TouchableOpacity>
       </View>
     );
   }
 }
+
+const style = StyleSheet.create({
+  container:{
+    flex: 1,
+  },
+  roundButton: {
+    backgroundColor: '#326da8',
+    position: 'absolute',
+    bottom: '6%',
+    right: '8%',
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    justifyContent: 'center',
+  },
+  textGeneralPadding: {paddingVertical: 5},
+  detailsText: {
+    borderTopWidth: 1,
+    marginTop: 10,
+    paddingTop: 10,
+  },
+});
 
 const mapStateToProps = (state) => ({
   jobs: state.home.jobs,

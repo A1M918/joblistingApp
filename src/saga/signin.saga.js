@@ -18,6 +18,7 @@ const SigninSaga = function* (action) {
       action.payload,
     );
     if (!response) {
+      yield put(signinFailure({message: 'No response from server'}));
       throw new Error({message: 'No response from http'});
     } else {
       yield put(signinSuccess(response));

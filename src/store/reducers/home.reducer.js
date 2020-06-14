@@ -41,6 +41,7 @@ const homeReducer = (state = getInitialState(), action) => {
       };
     case GET_ALL_JOBS_FAILURE:
       return {
+        ...state,
         isFetching: false,
         error: action.payload.message,
       };
@@ -51,13 +52,15 @@ const homeReducer = (state = getInitialState(), action) => {
         isSubmitting: true,
       };
     case CREATE_JOB_SUCCESS:
+      console.log('Createing Job Success', action.payload);
       return {
         ...state,
         isSubmitting: false,
-        ...action.payload.data,
+        jobs: [...state.jobs, ...action.payload.data],
       };
     case CREATE_JOB_FAILURE:
       return {
+        ...state,
         isSubmitting: false,
         error: action.payload.message,
       };
@@ -74,11 +77,11 @@ const homeReducer = (state = getInitialState(), action) => {
       };
     case GET_JOB_DETAILS_FAILURE:
       return {
+        ...state,
         isFetching: false,
         error: action.payload.message,
       };
     default:
-      console.log('Home Default State ====> ', state, action.type);
       return state;
   }
 };
