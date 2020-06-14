@@ -1,5 +1,7 @@
 'use strict';
 
+import {AsyncStorage} from 'react-native';
+
 const actionParent = 'auth';
 
 export const SIGN_IN_REQUEST = `${actionParent}/SIGN_IN_REQUEST`;
@@ -29,6 +31,7 @@ const signInReducer = (state = getInitialState(), action) => {
         isSubmitting: true,
       };
     case SIGN_IN_SUCCESS:
+      // AsyncStorage.setItem('access_token', JSON.stringify(action.payload.data));
       return {
         ...state,
         isSubmitting: false,

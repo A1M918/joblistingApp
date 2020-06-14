@@ -18,6 +18,7 @@ import ProfileScreen from './src/Screens/ProfileScreen';
 import {TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 import * as NavigationService from './src/NavigationService/NavigationService';
+import LoadingScreen from './src/Screens/LoadingScreen';
 
 const ProfileButton = () => (
   <TouchableOpacity onPress={() => NavigationService.navigate('Profile')}>
@@ -54,9 +55,15 @@ const authNavigator = createStackNavigator({
   SignUp: SignUpScreen,
 });
 
-const navigator = createSwitchNavigator({
-  Auth: authNavigator,
-  User: userStack,
-});
+const navigator = createSwitchNavigator(
+  {
+    Auth: authNavigator,
+    User: userStack,
+    Loading: LoadingScreen,
+  },
+  {
+    initialRouteName: 'Loading',
+  },
+);
 
 export default createAppContainer(navigator);

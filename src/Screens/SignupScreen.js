@@ -52,8 +52,7 @@ class SignUpScreen extends Component {
           onChangeText={(password2) => this.handleChange({password2})}
         />
         <Button
-          full
-          primary
+          title="Sign Up"
           style={{marginTop: 20, marginHorizontal: 15}}
           onPress={this.register}
         />
