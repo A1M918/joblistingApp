@@ -29,7 +29,6 @@ const ProfileButton = () => (
 const staticNavOptions = () => {
   return {
     navigationOptions: ({navigation}) => ({
-      // title: `${navigation.state.params.title}`,
       title: 'Home',
       // headerTitleStyle: styles.headerTitle,
       // headerStyle: styles.header,

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { View } from 'react-native'
+import {View, StyleSheet} from 'react-native';
 import {Input, Button} from 'react-native-elements';
 import {signinRequest} from '../store/actions/auth.actions.js';
 
@@ -22,8 +22,9 @@ class LoginScreen extends Component {
   };
 
   render() {
+    const {container} = styles;
     return (
-      <View>
+      <View style={container}>
         <Input
           placeholder="Email"
           onChangeText={(email) => this.handleChange({email})}
@@ -36,18 +37,25 @@ class LoginScreen extends Component {
 
         <Button
           title="Login"
-          style={{marginTop: 20, marginHorizontal: 15}}
+          buttonStyle={{marginTop: 20, marginHorizontal: 15}}
           onPress={this.login}
         />
         <Button
           title="Sign Up"
-          style={{marginTop: 10, marginHorizontal: 15}}
+          buttonStyle={{marginTop: 10, marginHorizontal: 15}}
           onPress={() => this.props.navigation.navigate('SignUp')}
         />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 20,
+  },
+});
 
 const mapStateToProps = (state) => ({});
 const mapDispatchToProps = (dispatch) => ({

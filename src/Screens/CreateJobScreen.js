@@ -11,10 +11,9 @@ class CreateJobScreen extends Component {
   }
 
   postJob = () => {
-    console.log('THIS IS JOB DATA ===> ', this.state);
-    // if (!this.props.submitting) {
+    if (!this.props.submitting) {
       this.props.postJob(this.state);
-    // }
+    }
   };
 
   handleChange = (stateObj) => {

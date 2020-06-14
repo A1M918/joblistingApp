@@ -20,7 +20,6 @@ class SignUpScreen extends Component {
 
   register = () => {
     if (this.state.password !== this.state.password2) {
-      console.log('Matched');
       return false;
     }
     this.props.signup(this.state);

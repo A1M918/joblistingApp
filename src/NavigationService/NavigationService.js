@@ -17,3 +17,7 @@ export function goBack() {
     config.navigator.dispatch(action);
   }
 }
+
+export function navigateToLogin() {
+  config.navigator._navigation.navigate('Login');
+}

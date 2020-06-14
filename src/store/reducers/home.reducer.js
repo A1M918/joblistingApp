@@ -46,13 +46,11 @@ const homeReducer = (state = getInitialState(), action) => {
         error: action.payload.message,
       };
     case CREATE_JOB_REQUEST:
-      console.log('Createing Job');
       return {
         ...state,
         isSubmitting: true,
       };
     case CREATE_JOB_SUCCESS:
-      console.log('Createing Job Success', action.payload);
       return {
         ...state,
         isSubmitting: false,

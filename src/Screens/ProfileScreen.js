@@ -6,7 +6,8 @@ import {
   AsyncStorage,
   ActivityIndicator,
 } from 'react-native';
-import {Card} from 'react-native-elements';
+import {Card, Button} from 'react-native-elements';
+import * as NavigationService from '../NavigationService/NavigationService';
 
 class ProfileScreen extends Component {
   constructor(props) {
@@ -23,16 +24,27 @@ class ProfileScreen extends Component {
     this.setState({user: JSON.parse(user)});
   };
 
+  logout = () => {
+    AsyncStorage.removeItem('user');
+    AsyncStorage.removeItem('access_token');
+    NavigationService.navigateToLogin();
+  };
+
   render() {
-    const {container, textGeneralPadding} = style;
+    const {container, textGeneralPadding, logoutButton} = style;
     const {user} = this.state;
-    console.log('Userf ==== > ', user);
     return user ? (
       <View style={container}>
-        <Card style={container} title={user.name}>
+        <Card title={user.name}>
           <Text style={textGeneralPadding}>Email: {user.email}</Text>
           <Text style={textGeneralPadding}>Phone: {user.phone}</Text>
         </Card>
+
+        <Button
+          title="Logout"
+          buttonStyle={logoutButton}
+          onPress={() => this.logout()}
+        />
       </View>
     ) : (
       <ActivityIndicator />
@@ -43,6 +55,11 @@ class ProfileScreen extends Component {
 const style = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  logoutButton: {
+    width: '90%',
+    marginLeft: '5%',
+    marginTop: '5%',
   },
   textGeneralPadding: {paddingVertical: 5},
   detailsText: {
